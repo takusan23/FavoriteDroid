@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FavoriteDroid</string>
+    <string name="add_widget">FavoriteDroid Widget</string>
+    <string name="app_widget_description">アプリを使用状況に合わせて表示させます</string>
 </resources>

@@ -30,6 +30,10 @@ interface AppBanditArmDao {
     @Query("SELECT COUNT(*) FROM app_bandit_arm")
     suspend fun getAllCount(): Int
 
+    /** アプリケーションIDから [AppBanditArm] を取得する */
+    @Query("SELECT * FROM app_bandit_arm WHERE application_id = :applicationId")
+    suspend fun getArmFromApplicationId(applicationId: String): AppBanditArm
+
     /** すべてのアプリの起動回数を合計する */
     @Query("SELECT SUM(launch_count) FROM app_bandit_arm")
     suspend fun getAllLaunchCount(): Int
