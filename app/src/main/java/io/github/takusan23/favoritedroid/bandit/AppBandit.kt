@@ -51,7 +51,7 @@ object AppBandit {
         val banditList = arrayListOf<AppBanditData>().also { buildList ->
             repeat(size) {
                 // すでに追加済みのアプリを再度選ばないようにする
-                val filterList = appBanditDataList.filter { origin -> !buildList.contains(origin) }
+                val filterList = appBanditDataList.filter { origin -> !buildList.any { it.applicationId == origin.applicationId } }
                 // 捜索と活用、どちらを行うか
                 buildList += if (randomBoolean(EPSILON)) {
                     // 捜索を行う。適当に選ぶ

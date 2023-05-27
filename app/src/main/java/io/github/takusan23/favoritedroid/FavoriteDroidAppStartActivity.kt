@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import io.github.takusan23.favoritedroid.db.AppBanditArmDb
+import io.github.takusan23.favoritedroid.widget.FavoriteDroidWidget
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,7 +21,6 @@ class FavoriteDroidAppStartActivity : ComponentActivity() {
 
         // アプリケーションIDから起動
         val launchApplicationId = intent?.getStringExtra(KEY_LAUNCH_APPLICATION_ID)!!
-        println("launchApplicationId = $launchApplicationId")
         val launchIntent = packageManager.getLaunchIntentForPackage(launchApplicationId)
         if (launchIntent != null) {
             startActivity(launchIntent)
@@ -31,6 +31,8 @@ class FavoriteDroidAppStartActivity : ComponentActivity() {
                     val dao = AppBanditArmDb.getInstance(this@FavoriteDroidAppStartActivity).appBanditArmDao()
                     val entity = dao.getArmFromApplicationId(launchApplicationId)
                     dao.update(entity.copy(launchCount = entity.launchCount + 1))
+                    // ウイジェットを更新
+                    FavoriteDroidWidget.updateAppWidget(this@FavoriteDroidAppStartActivity)
                 }
                 // この Activity は不要になるので終了
                 finishAndRemoveTask()
