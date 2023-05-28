@@ -8,13 +8,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:text="アプリの提案"
+        android:text="お気に入りのアプリ"
         android:textColor="@color/widget_content"
         android:textSize="18sp" />
 
-    <GridView
-        android:id="@+id/widget_grid_view"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="5" />
+        android:background="@drawable/app_widget_inner_background"
+        android:layout_margin="4dp">
+
+        <GridView
+            android:id="@+id/widget_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="5" />
+    </FrameLayout>
 </LinearLayout>

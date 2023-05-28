@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import androidx.core.graphics.drawable.toBitmap
 import io.github.takusan23.favoritedroid.FavoriteDroidAppStartActivity
 import io.github.takusan23.favoritedroid.R
 import io.github.takusan23.favoritedroid.bandit.AppBandit
 import io.github.takusan23.favoritedroid.bandit.AppBanditData
+import io.github.takusan23.favoritedroid.tool.AppIconTool
 import kotlinx.coroutines.runBlocking
 
 /** ウィジェットの GridView で使う Adapter */
@@ -46,8 +46,10 @@ class FavoriteDroidWidgetService : RemoteViewsService() {
         override fun getViewAt(position: Int): RemoteViews {
             val data = appBanditList[position]
             return RemoteViews(context.packageName, R.layout.favorite_droid_widget_item).apply {
-                setImageViewBitmap(R.id.favorite_droid_widget_item_image_view, data.icon.toBitmap())
+                setImageViewBitmap(R.id.favorite_droid_widget_item_image_view, AppIconTool.createIconBitmap(context, data.icon))
                 setTextViewText(R.id.favorite_droid_widget_item_text_view, data.label)
+                // 押したらアプリを起動
+                // アプリを起動するんだけど、データベースに起動回数をインクリメントするため、一旦自前の画面を通ってから
                 val intent = FavoriteDroidAppStartActivity.setParameter(Intent(), data.applicationId)
                 setOnClickFillInIntent(R.id.favorite_droid_widget_item_parent, intent)
             }
