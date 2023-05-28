@@ -1,18 +1,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_widget_background"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/android_favorite_droid"
-        android:drawableTint="@color/widget_content"
-        android:padding="4dp"
-        android:text="お気に入りのアプリ"
-        android:textColor="@color/widget_content"
-        android:textSize="18sp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/android_favorite_droid"
+            android:drawableTint="@color/widget_content"
+            android:padding="4dp"
+            android:text="お気に入りのアプリ"
+            android:textColor="@color/widget_content"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/widget_update_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="4dp"
+            android:src="@drawable/outline_refresh_24"
+            android:tint="@color/widget_content" />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
